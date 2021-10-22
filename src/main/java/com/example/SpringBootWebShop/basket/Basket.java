@@ -1,22 +1,23 @@
 package com.example.SpringBootWebShop.basket;
 
 import com.example.SpringBootWebShop.product.Product;
-import com.example.SpringBootWebShop.user.User;
+import com.example.SpringBootWebShop.user.AppUser;
 
 import javax.persistence.*;
 import java.util.Date;
-
+@Table(name="basket")
 @Entity
 public class Basket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
     @JoinColumn(
             nullable = false,
-            name = "user_id"
+            name = "app_user_id"
     )
-    private User user;
+    private AppUser appUser;
 
     @ManyToOne
     @JoinColumn(
@@ -39,12 +40,12 @@ public class Basket {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public AppUser getAppUser() {
+        return appUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 
     public Product getProduct() {

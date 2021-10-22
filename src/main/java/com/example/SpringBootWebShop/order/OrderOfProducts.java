@@ -1,12 +1,13 @@
-package com.example.SpringBootWebShop.product;
+package com.example.SpringBootWebShop.order;
 
+import com.example.SpringBootWebShop.product.Product;
 import com.example.SpringBootWebShop.user.AppUser;
 
 import javax.persistence.*;
 import java.util.Date;
-@Table(name="product")
+@Table(name="order_of_products")
 @Entity
-public class Product {
+public class OrderOfProducts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,21 +18,17 @@ public class Product {
             name = "app_user_id"
     )
     private AppUser user;
-    @Column(
-            name = "title",
+
+    @ManyToOne
+    @JoinColumn(
             nullable = false,
-            columnDefinition = "TEXT"
+            name = "product_id"
     )
-    private String title;
-    @Column(
-            name = "description",
-            columnDefinition = "TEXT"
-    )
-    private String description;
-    private Double price;
+    private Product product;
+    private Double totalPrice;
     private Date createdAt;
 
-    public Product() {
+    public OrderOfProducts() {
 
     }
 
@@ -51,28 +48,20 @@ public class Product {
         this.user = user;
     }
 
-    public String getTitle() {
-        return title;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public String getDescription() {
-        return description;
+    public Double getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public Date getCreatedAt() {

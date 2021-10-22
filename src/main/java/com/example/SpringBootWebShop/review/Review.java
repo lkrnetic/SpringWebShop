@@ -1,12 +1,12 @@
 package com.example.SpringBootWebShop.review;
 
 import com.example.SpringBootWebShop.product.Product;
-import com.example.SpringBootWebShop.user.User;
+import com.example.SpringBootWebShop.user.AppUser;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Table
+@Table(name="review")
 @Entity
 public class Review {
     @Id
@@ -15,9 +15,9 @@ public class Review {
     @ManyToOne
     @JoinColumn(
             nullable = false,
-            name = "user_id"
+            name = "app_user_id"
     )
-    private User user;
+    private AppUser user;
 
     @ManyToOne
     @JoinColumn(
@@ -45,11 +45,11 @@ public class Review {
         this.id = id;
     }
 
-    public User getUser() {
+    public AppUser getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(AppUser user) {
         this.user = user;
     }
 
