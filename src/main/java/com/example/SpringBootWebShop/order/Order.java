@@ -1,10 +1,11 @@
 package com.example.SpringBootWebShop.order;
 
+import com.example.SpringBootWebShop.appuser.AppUser;
 import com.example.SpringBootWebShop.product.Product;
-import com.example.SpringBootWebShop.user.AppUser;
 
 import javax.persistence.*;
 import java.util.Date;
+
 @Table(name="order_of_products")
 @Entity
 public class Order {

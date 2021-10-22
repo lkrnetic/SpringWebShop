@@ -1,4 +1,4 @@
-package com.example.SpringBootWebShop.user;
+package com.example.SpringBootWebShop.appuser;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+
 @Table(name="app_user")
 @Entity
 public class AppUser implements UserDetails {
@@ -25,12 +26,24 @@ public class AppUser implements UserDetails {
     private String forgetPasswordToken;
     private String accountActivationToken;
     @Enumerated(EnumType.STRING)
-    private UserRole userRole;
+    private AppUserRole userRole;
     private Boolean locked = false;
     private Boolean enabled = false;
 
     public AppUser() {
 
+    }
+
+    public AppUser(String firstName, String lastName, String email, String password, String address, String phoneNumber, String country, Integer zipCode, AppUserRole userRole) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.country = country;
+        this.zipCode = zipCode;
+        this.userRole = userRole;
     }
 
     @Override
@@ -145,11 +158,11 @@ public class AppUser implements UserDetails {
         this.accountActivationToken = accountActivationToken;
     }
 
-    public UserRole getUserRole() {
+    public AppUserRole getUserRole() {
         return userRole;
     }
 
-    public void setUserRole(UserRole userRole) {
+    public void setUserRole(AppUserRole userRole) {
         this.userRole = userRole;
     }
 

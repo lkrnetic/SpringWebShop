@@ -2,7 +2,6 @@ package com.example.SpringBootWebShop.basket.basket_products;
 
 import com.example.SpringBootWebShop.basket.Basket;
 import com.example.SpringBootWebShop.order.Order;
-import com.example.SpringBootWebShop.product.Product;
 
 import javax.persistence.*;
 

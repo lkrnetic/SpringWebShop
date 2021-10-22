@@ -1,10 +1,10 @@
 package com.example.SpringBootWebShop.basket;
 
+import com.example.SpringBootWebShop.appuser.AppUser;
 import com.example.SpringBootWebShop.product.Product;
-import com.example.SpringBootWebShop.user.AppUser;
 
 import javax.persistence.*;
-import java.util.Date;
+
 @Table(name="basket")
 @Entity
 public class Basket {

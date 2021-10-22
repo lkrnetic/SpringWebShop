@@ -1,7 +1,7 @@
 package com.example.SpringBootWebShop.review;
 
+import com.example.SpringBootWebShop.appuser.AppUser;
 import com.example.SpringBootWebShop.product.Product;
-import com.example.SpringBootWebShop.user.AppUser;
 
 import javax.persistence.*;
 import java.util.Date;

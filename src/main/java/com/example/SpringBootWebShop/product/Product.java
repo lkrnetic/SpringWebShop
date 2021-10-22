@@ -1,9 +1,10 @@
 package com.example.SpringBootWebShop.product;
 
-import com.example.SpringBootWebShop.user.AppUser;
+import com.example.SpringBootWebShop.appuser.AppUser;
 
 import javax.persistence.*;
 import java.util.Date;
+
 @Table(name="product")
 @Entity
 public class Product {
