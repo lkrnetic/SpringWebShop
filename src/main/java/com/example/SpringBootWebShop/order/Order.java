@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 @Table(name="order_of_products")
 @Entity
-public class OrderOfProducts {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,7 +28,7 @@ public class OrderOfProducts {
     private Double totalPrice;
     private Date createdAt;
 
-    public OrderOfProducts() {
+    public Order() {
 
     }
 

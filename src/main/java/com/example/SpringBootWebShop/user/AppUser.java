@@ -20,6 +20,7 @@ public class AppUser implements UserDetails {
     private String password;
     private String address;
     private String phoneNumber;
+    private String country;
     private Integer zipCode;
     private String forgetPasswordToken;
     private String accountActivationToken;
@@ -166,5 +167,13 @@ public class AppUser implements UserDetails {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }
