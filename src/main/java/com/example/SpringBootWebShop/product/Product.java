@@ -1,13 +1,18 @@
 package com.example.SpringBootWebShop.product;
 
 import com.example.SpringBootWebShop.appuser.AppUser;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Table(name="product")
 @Entity
-public class Product {
+@ToString
+public class Product implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,7 +22,7 @@ public class Product {
             nullable = false,
             name = "app_user_id"
     )
-    private AppUser user;
+    private AppUser appUser;
     @Column(
             name = "title",
             nullable = false,
@@ -30,10 +35,18 @@ public class Product {
     )
     private String description;
     private Double price;
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
     public Product() {
 
+    }
+
+    public Product(AppUser appUser, String title, String description, Double price, LocalDateTime createdAt) {
+        this.appUser = appUser;
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.createdAt = createdAt;
     }
 
     public Long getId() {
@@ -44,12 +57,12 @@ public class Product {
         this.id = id;
     }
 
-    public AppUser getUser() {
-        return user;
+    public AppUser getAppUser() {
+        return appUser;
     }
 
-    public void setUser(AppUser user) {
-        this.user = user;
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 
     public String getTitle() {
@@ -76,11 +89,11 @@ public class Product {
         this.price = price;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 }

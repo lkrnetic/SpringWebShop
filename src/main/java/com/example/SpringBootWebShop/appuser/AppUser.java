@@ -1,16 +1,19 @@
 package com.example.SpringBootWebShop.appuser;
 
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 
 @Table(name="app_user")
 @Entity
-public class AppUser implements UserDetails {
+@ToString
+public class AppUser implements UserDetails, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -189,4 +192,5 @@ public class AppUser implements UserDetails {
     public void setCountry(String country) {
         this.country = country;
     }
+
 }

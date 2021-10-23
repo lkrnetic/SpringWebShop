@@ -6,9 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Repository
 @Transactional(readOnly = true)
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {
+    AppUser getById(Long id);
     AppUser findByEmail(String email);
     AppUser findByForgetPasswordToken(String forgetPasswordToken);
     AppUser findByAccountActivationToken(String accountActivationToken);
