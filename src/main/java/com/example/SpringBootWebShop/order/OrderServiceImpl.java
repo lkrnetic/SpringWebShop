@@ -6,6 +6,7 @@ import com.example.SpringBootWebShop.basket.Basket;
 import com.example.SpringBootWebShop.basket.BasketRepository;
 import com.example.SpringBootWebShop.basket.BasketServiceImpl;
 import com.example.SpringBootWebShop.basket.basket_product.BasketProduct;
+import com.example.SpringBootWebShop.basket.basket_product.BasketProductRepository;
 import com.example.SpringBootWebShop.basket.basket_product.BasketProductServiceImpl;
 import com.example.SpringBootWebShop.order.order_product.OrderProduct;
 import com.example.SpringBootWebShop.order.order_product.OrderProductRepository;
@@ -23,9 +24,11 @@ public class OrderServiceImpl {
     private final AppUserServiceImpl appUserService;
     private final BasketServiceImpl basketService;
     private final BasketProductServiceImpl basketProductService;
+    private final BasketProductRepository basketProductRepository;
     private final OrderProductRepository orderProductRepository;
+
     public Order getById(Long id) {
-        return orderRepository.getById(id);
+        return orderRepository.findById(id).get();
     }
 
     public Order create(OrderRequest request) {
@@ -39,7 +42,13 @@ public class OrderServiceImpl {
             Product product = basketProduct.getProduct();
             OrderProduct orderProduct = new OrderProduct(product, savedOrder, basketProduct.getQuantity());
             orderProductRepository.save(orderProduct);
+            basketProductRepository.delete(basketProduct);
         }
-        return savedOrder;
+        return orderRepository.findById(savedOrder.getId()).get();
     }
+
+    public List<Order> getOrdersByUserId (AppUser appUser) {
+        return orderRepository.findByAppUser(appUser);
+    }
+
 }

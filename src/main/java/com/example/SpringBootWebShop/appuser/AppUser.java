@@ -1,6 +1,7 @@
 package com.example.SpringBootWebShop.appuser;
 
 import com.example.SpringBootWebShop.basket.Basket;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -39,6 +40,8 @@ public class AppUser implements UserDetails, Serializable {
     private AppUserRole userRole;
     private Boolean locked = false;
     private Boolean enabled = false;
+
+    @JsonManagedReference
     @OneToOne(mappedBy = "appUser")
     private Basket basket;
 

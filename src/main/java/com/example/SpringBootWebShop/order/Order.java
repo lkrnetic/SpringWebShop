@@ -2,8 +2,10 @@ package com.example.SpringBootWebShop.order;
 
 import com.example.SpringBootWebShop.basket.basket_product.BasketProduct;
 import com.example.SpringBootWebShop.basket.basket_product.BasketProductRequest;
+import com.example.SpringBootWebShop.order.order_product.OrderProduct;
 import com.example.SpringBootWebShop.product.Product;
 import com.example.SpringBootWebShop.appuser.AppUser;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Table(name="order_of_products")
 @Entity
@@ -30,11 +33,15 @@ public class Order {
             nullable = false,
             name = "app_user_id"
     )
-    private AppUser user;
+    private AppUser appUser;
     private LocalDateTime createdAt;
 
-    public Order(AppUser user, LocalDateTime createdAt) {
-        this.user = user;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "order")
+    private List<OrderProduct> orderProducts;
+
+    public Order(AppUser appUser, LocalDateTime createdAt) {
+        this.appUser = appUser;
         this.createdAt = createdAt;
     }
 }

@@ -36,10 +36,10 @@ public class AppUserServiceImpl implements UserDetailsService, AppUserService{
         AppUser appUser = new AppUser(request.getFirstName(), request.getLastName(), request.getEmail(), request.getPassword(), request.getAddress(), request.getPhoneNumber(), request.getCountry(), request.getZipCode(), AppUserRole.USER);
         String encodedPassword = bCryptPasswordEncoder.encode(appUser.getPassword());
         appUser.setPassword(encodedPassword);
-        appUserRepository.save(appUser);
-        Basket basket = basketService.createBasket(findByEmail(request.getEmail()).getId());
-        appUser.setBasket(basket);
-        return appUser;
+        AppUser savedAppUser = appUserRepository.save(appUser);
+        Basket basket = basketService.createBasket(savedAppUser);
+        savedAppUser.setBasket(basket);
+        return savedAppUser;
     }
 
 
@@ -50,7 +50,7 @@ public class AppUserServiceImpl implements UserDetailsService, AppUserService{
 
     @Override
     public AppUser getById(Long id) {
-        return appUserRepository.getById(id);
+        return appUserRepository.findById(id).get();
     }
 
 }

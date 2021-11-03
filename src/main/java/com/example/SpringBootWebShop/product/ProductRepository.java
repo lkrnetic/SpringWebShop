@@ -10,7 +10,6 @@ import java.util.List;
 
 @Transactional(readOnly = true)
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    Product getById(Long id);
     List<Product> findAll();
     @Transactional
     @Modifying

@@ -15,6 +15,12 @@ public class AppUserController {
         return String.valueOf(request.getAddress());
     }
 
+    @GetMapping("/{id}")
+    public AppUser getUser(@PathVariable Long id) {
+        //return appUserServiceImpl.editUser(request);
+        return appUserServiceImpl.getById(id);
+    }
+
     @PostMapping
     public AppUser createUser(@RequestBody AppUserRequest request) {
         return appUserServiceImpl.createUser(request);

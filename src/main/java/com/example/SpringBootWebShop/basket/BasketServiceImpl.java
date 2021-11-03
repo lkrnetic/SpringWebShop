@@ -23,8 +23,10 @@ public class BasketServiceImpl implements BasketService {
     }
 
     @Override
-    public Basket createBasket(Long user_id) {
-        return null;
+    public Basket createBasket(AppUser appUser) {
+        Basket basket = new Basket(appUser);
+        basketRepository.save(basket);
+        return basket;
     }
 
 

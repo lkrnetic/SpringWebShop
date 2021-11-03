@@ -13,4 +13,5 @@ public class BasketProductRequest {
     private Long basketId;
     private Long productId;
     private Integer quantity;
+
 }

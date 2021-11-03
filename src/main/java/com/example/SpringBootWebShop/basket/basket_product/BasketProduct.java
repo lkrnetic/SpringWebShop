@@ -3,6 +3,7 @@ package com.example.SpringBootWebShop.basket.basket_product;
 import com.example.SpringBootWebShop.basket.Basket;
 import com.example.SpringBootWebShop.order.Order;
 import com.example.SpringBootWebShop.product.Product;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,6 +26,7 @@ public class BasketProduct {
             name = "product_id"
     )
     private Product product;
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(
             nullable = false,

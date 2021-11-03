@@ -22,12 +22,13 @@ public class BasketProductServiceImpl {
         Basket basket = basketServiceImpl.getById(request.getBasketId());
         Product product = productService.getById(request.getProductId());
         BasketProduct basketProduct = new BasketProduct(product, basket, request.getQuantity());
+        basketProductRepository.save(basketProduct);
         return basketProduct;
     }
 
     public BasketProduct updateBasketProduct(BasketProductRequest request, Long id) {
         basketProductRepository.updateBasketProduct(id, request.getQuantity());
-        BasketProduct updatedBaskedProduct = basketProductRepository.getById(id);
+        BasketProduct updatedBaskedProduct = basketProductRepository.findById(id).get();
         return updatedBaskedProduct;
     }
 

@@ -13,7 +13,6 @@ import java.util.List;
 @Repository
 @Transactional(readOnly = true)
 public interface BasketProductRepository extends JpaRepository<BasketProduct, Long> {
-    BasketProduct getById(Long id);
     List<BasketProduct> findByBasket(Basket basket);
     @Transactional
     @Modifying

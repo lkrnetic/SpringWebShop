@@ -6,5 +6,5 @@ import com.example.SpringBootWebShop.review.ReviewRequest;
 
 public interface BasketService {
     Basket getById(Long id);
-    Basket createBasket(Long user_id);
+    Basket createBasket(AppUser appUser);
 }

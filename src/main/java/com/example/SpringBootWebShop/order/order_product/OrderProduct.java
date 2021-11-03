@@ -2,6 +2,7 @@ package com.example.SpringBootWebShop.order.order_product;
 
 import com.example.SpringBootWebShop.order.Order;
 import com.example.SpringBootWebShop.product.Product;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,7 +24,7 @@ public class OrderProduct {
             name = "product_id"
     )
     private Product product;
-
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(
             nullable = false,

@@ -30,7 +30,6 @@ public class Review  {
             nullable = false,
             name = "product_id"
     )
-
     private Product product;
 
     @Column(
