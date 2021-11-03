@@ -10,13 +10,13 @@ public class AppUserController {
     private final AppUserServiceImpl appUserServiceImpl;
 
     @PutMapping("/{id}")
-    public String editUser(@RequestBody RegistrationRequest request, @PathVariable Long id) {
+    public String editUser(@RequestBody AppUserRequest request, @PathVariable Long id) {
         //return appUserServiceImpl.editUser(request);
         return String.valueOf(request.getAddress());
     }
 
     @PostMapping
-    public String registerUser(@RequestBody RegistrationRequest request) {
-        return appUserServiceImpl.signUpUser(request);
+    public AppUser createUser(@RequestBody AppUserRequest request) {
+        return appUserServiceImpl.createUser(request);
     }
 }

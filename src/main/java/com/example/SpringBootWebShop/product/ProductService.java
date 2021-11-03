@@ -1,5 +1,7 @@
 package com.example.SpringBootWebShop.product;
 
+import com.example.SpringBootWebShop.appuser.AppUser;
+
 import java.util.List;
 
 public interface ProductService {

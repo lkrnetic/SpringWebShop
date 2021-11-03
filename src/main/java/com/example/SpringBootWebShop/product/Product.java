@@ -1,22 +1,24 @@
 package com.example.SpringBootWebShop.product;
 
 import com.example.SpringBootWebShop.appuser.AppUser;
+import com.example.SpringBootWebShop.review.Review;
+import com.fasterxml.jackson.annotation.*;
 import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Table(name="product")
 @Entity
 @ToString
-public class Product implements Serializable {
-
+public class Product  {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne
     @JoinColumn(
             nullable = false,
@@ -33,6 +35,11 @@ public class Product implements Serializable {
             name = "description",
             columnDefinition = "TEXT"
     )
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "product")
+    private List<Review> reviews;
+
     private String description;
     private Double price;
     private LocalDateTime createdAt;
@@ -95,5 +102,13 @@ public class Product implements Serializable {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }

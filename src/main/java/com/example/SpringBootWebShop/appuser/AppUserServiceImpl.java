@@ -1,5 +1,7 @@
 package com.example.SpringBootWebShop.appuser;
 
+import com.example.SpringBootWebShop.basket.Basket;
+import com.example.SpringBootWebShop.basket.BasketServiceImpl;
 import com.example.SpringBootWebShop.validation.EmailValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +18,7 @@ public class AppUserServiceImpl implements UserDetailsService, AppUserService{
     private final AppUserRepository appUserRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final EmailValidator emailValidator;
-
+    private final BasketServiceImpl basketService;
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         /*
@@ -26,7 +28,7 @@ public class AppUserServiceImpl implements UserDetailsService, AppUserService{
         return appUserRepository.findByEmail(email);
     }
 
-    public String signUpUser(RegistrationRequest request) {
+    public AppUser createUser(AppUserRequest request) {
         boolean isValidEmail = emailValidator.test(request.getEmail());
         if (!isValidEmail) {
             throw new IllegalStateException("email not valid");
@@ -35,7 +37,9 @@ public class AppUserServiceImpl implements UserDetailsService, AppUserService{
         String encodedPassword = bCryptPasswordEncoder.encode(appUser.getPassword());
         appUser.setPassword(encodedPassword);
         appUserRepository.save(appUser);
-        return "User is saved!";
+        Basket basket = basketService.createBasket(findByEmail(request.getEmail()).getId());
+        appUser.setBasket(basket);
+        return appUser;
     }
 
 

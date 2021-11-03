@@ -5,6 +5,7 @@ import com.example.SpringBootWebShop.appuser.AppUserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.xml.bind.SchemaOutputResolver;
 import java.time.LocalDateTime;
 import java.util.List;
 
