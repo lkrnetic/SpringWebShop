@@ -6,6 +6,7 @@ import com.example.SpringBootWebShop.basket.Basket;
 import com.example.SpringBootWebShop.basket.BasketServiceImpl;
 import com.example.SpringBootWebShop.product.Product;
 import com.example.SpringBootWebShop.product.ProductServiceImpl;
+import com.example.SpringBootWebShop.review.Review;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,8 @@ public class BasketProductServiceImpl {
 
     public BasketProduct updateBasketProduct(BasketProductRequest request, Long id) {
         basketProductRepository.updateBasketProduct(id, request.getQuantity());
-        BasketProduct updatedBaskedProduct = basketProductRepository.findById(id).get();
+        BasketProduct updatedBaskedProduct = basketProductRepository.getById(id);
+        //updatedBaskedProduct.setQuantity(request.getQuantity());
         return updatedBaskedProduct;
     }
 
@@ -39,5 +41,9 @@ public class BasketProductServiceImpl {
 
     public List<BasketProduct> getBasketProductsByBasket (Basket basket) {
         return  basketProductRepository.findByBasket(basket);
+    }
+
+    public BasketProduct getById(Long id) {
+        return basketProductRepository.findById(id).orElse(null);
     }
 }

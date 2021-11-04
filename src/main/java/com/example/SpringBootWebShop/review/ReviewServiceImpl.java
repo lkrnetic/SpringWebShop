@@ -38,7 +38,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public Review getById(Long id) {
-        return reviewRepository.getById(id);
+        return reviewRepository.findById(id).orElse(null);
     }
 
     @Override

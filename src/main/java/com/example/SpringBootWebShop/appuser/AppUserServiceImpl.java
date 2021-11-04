@@ -50,7 +50,7 @@ public class AppUserServiceImpl implements UserDetailsService, AppUserService{
 
     @Override
     public AppUser getById(Long id) {
-        return appUserRepository.findById(id).get();
+        return appUserRepository.findById(id).orElse(null);
     }
 
 }

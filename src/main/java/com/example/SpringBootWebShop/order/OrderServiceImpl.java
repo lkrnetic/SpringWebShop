@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,20 +32,24 @@ public class OrderServiceImpl {
         return orderRepository.findById(id).get();
     }
 
-    public Order create(OrderRequest request) {
+    public Order createOrder(OrderRequest request) {
         AppUser appUser = appUserService.getById(request.getUserId());
         Basket basket = basketService.getById(request.getBasketId());
         LocalDateTime localDateTime = LocalDateTime.now();
         Order order = new Order(appUser, localDateTime);
         Order savedOrder = orderRepository.save(order);
         List<BasketProduct> basketProducts = basketProductService.getBasketProductsByBasket(basket);
+        List<OrderProduct> orderProducts = new ArrayList<>();;
         for(BasketProduct basketProduct: basketProducts) {
             Product product = basketProduct.getProduct();
             OrderProduct orderProduct = new OrderProduct(product, savedOrder, basketProduct.getQuantity());
-            orderProductRepository.save(orderProduct);
+            orderProduct = orderProductRepository.save(orderProduct);
+            orderProducts.add(orderProduct);
             basketProductRepository.delete(basketProduct);
         }
-        return orderRepository.findById(savedOrder.getId()).get();
+        order = orderRepository.findById(savedOrder.getId()).get();
+        order.setOrderProducts(orderProducts);
+        return order;
     }
 
     public List<Order> getOrdersByUserId (AppUser appUser) {
