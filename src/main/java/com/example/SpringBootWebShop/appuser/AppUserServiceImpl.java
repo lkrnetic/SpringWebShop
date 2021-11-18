@@ -36,6 +36,7 @@ public class AppUserServiceImpl implements UserDetailsService, AppUserService{
         AppUser appUser = new AppUser(request.getFirstName(), request.getLastName(), request.getEmail(), request.getPassword(), request.getAddress(), request.getPhoneNumber(), request.getCountry(), request.getZipCode(), AppUserRole.USER);
         String encodedPassword = bCryptPasswordEncoder.encode(appUser.getPassword());
         appUser.setPassword(encodedPassword);
+        appUser.setEnabled(true);
         AppUser savedAppUser = appUserRepository.save(appUser);
         Basket basket = basketService.createBasket(savedAppUser);
         savedAppUser.setBasket(basket);
